@@ -1,0 +1,59 @@
+plugins {
+    id 'groovy'
+    id 'application'
+    id 'jacoco'
+    id 'project-report'
+    id 'findbugs'
+    id 'pmd'
+    id 'checkstyle'
+}
+
+group = 'com.fyelci'
+description = 'Sample project that runs on diffirent nodes and communicates with each other'
+
+sourceCompatibility = 1.8
+
+mainClassName = "com.fyelci.leaderelection.LeaderElectionStarter"
+
+applicationDefaultJvmArgs = ["-Djava.net.preferIPv4Stack=true"]
+
+wrapper {
+    gradleVersion = 3.3
+}
+
+repositories { jcenter(); mavenCentral(); mavenLocal() }
+dependencies {
+    compile 'org.jgroups:jgroups:4.0.0.Final'
+
+    testCompile 'org.slf4j:slf4j-api:1.7.21'
+    testCompile 'ch.qos.logback:logback-classic:1.1.7'
+    testCompile 'org.slf4j:jul-to-slf4j:1.7.21'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+}
+
+
+
+test {
+    testLogging {
+        events 'skipped', 'failed', 'standard_error'
+        exceptionFormat 'full'
+    }
+    maxHeapSize = '512m'
+}
+
+jacocoTestReport.reports.xml.enabled = true
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
