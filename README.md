@@ -1,4 +1,4 @@
-#JGroup Leader Election
+# JGroup Leader Election
 This project implenets a distrubted nodes which may run in same or diffirenet machines. 
 Distrubuted system is implemented by jGroup using multicast protocol. Leader election method is implemented by getting first joined node to cluster.
 
@@ -12,3 +12,6 @@ This will start a node in current network
 ### Build Manual
 
 You can build project by ```./gradlew clean build```
+
+### Quality
+Test are written in groovy spcok. Findbug and Checkstyle are integrated as gradle plugin.
